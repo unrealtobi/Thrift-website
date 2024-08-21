@@ -2,17 +2,21 @@ import React from 'react';
 import cart from '../assets/cart.svg'
 import icons from '../assets/icons.svg'
 import shop from '../assets/shop.svg'
+import phone2 from '../assets/phone2.svg'
 
 const AboutMyThrift = () => {
   return (
-     <div className="">
-        <section className="w-full max-w-[1440px] h-[260px] gap-6  mx-auto py-10">
-      <div className="ml-6">
+     <div className=" ">
+        <section className="w-full max-w-[1440px] h-[600px] gap-6  mx-auto py-14 flex justify-center ">
+            <div className='w-10/12 ml-16'>
+                <img src={phone2} alt="" />
+            </div>
+      <div className="ml-6 mt-32">
         <h2 className="text-4xl font-bold">
           <span className="text-black">What is </span>
-          <span className="text-[#FA764C]">My Thrift?</span>
+          <span className="text-customOrange">My Thrift?</span>
         </h2>
-        <p className="mt-4 text-gray-600 max-w-fit ">
+        <p className="mt-4 text-gray-600 max-w-full mr-16 ">
           MyThrift is an app that lets you discover and buy a wide range of
           unique thrifted and new clothes. You can explore items from local
           sellers and online stores all in one place. It’s designed to make
@@ -25,10 +29,10 @@ const AboutMyThrift = () => {
     </section>
 
         {/* Cards Section */}
-        <section className='bg-[#F7F7F7] py-7'>
+        <section className='bg-[#F7F7F7] py-14'>
   <h2 className="text-4xl font-bold text-center mb-7">
     <span className="text-black">What Can I do With </span>
-    <span className="text-[#FA764C]">My Thrift?</span>
+    <span className="text-customOrange">My Thrift?</span>
   </h2>
   <div className="p-7 flex flex-col lg:flex-row justify-around items-center space-y-2 lg:space-y-0 lg:space-x-0">
     {/* Card 1 */}

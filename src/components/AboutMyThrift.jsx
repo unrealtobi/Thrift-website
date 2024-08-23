@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger"; // Import ScrollTrigger
 import cart from "../assets/cart.svg";
-import icons from "../assets/icons.svg";
+import icons from "../assets/cons.svg";
 import shop from "../assets/shop.svg";
 import phone2 from "../assets/phone2.svg";
 

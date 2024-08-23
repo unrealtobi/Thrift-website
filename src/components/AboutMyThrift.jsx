@@ -68,7 +68,7 @@ const AboutMyThrift = () => {
             <span className="text-black">What is </span>
             <span className="text-customOrange">My Thrift?</span>
           </h2>
-          <p className="md:mt-4 lg:mt-4 mt-7 p-3- text-gray-600 md:text-lg lg:text-lg md:max-w-full lg:max-w-full lg:mr-16 md:mr-16">
+          <p className="md:mt-4 lg:mt-4 mt-7 p-4 text-gray-600 md:text-lg lg:text-lg md:max-w-full lg:max-w-full lg:mr-16 md:mr-16">
             My Thrift is an app that lets you discover and buy a wide range of
             unique thrifted and new clothes. You can explore items from local
             sellers and online stores all in one place. It’s designed to make
@@ -85,7 +85,7 @@ const AboutMyThrift = () => {
       </section>
 
       {/* Cards Section */}
-      <section className="bg-[#F7F7F7] py-14">
+      <section className="bg-[#F7F7F7] py-12">
         <h2 className="text-4xl font-bold text-center mb-7">
           <span className="text-black">What Can I do With </span>
           <span className="text-customOrange">My Thrift?</span>

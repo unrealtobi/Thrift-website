@@ -135,7 +135,7 @@ const Hero = () => {
   return (
     <div className="bg-customOrange relative overflow-hidden bg-[url('/src/assets/frame43.png')] bg-no-repeat bg-cover bg-center">
       <nav className="sticky top-0 z-50">
-        <div className="container mt-6 md:mx-auto md:px-6 flex md:justify-between md:items-center">
+        <div className="container mt-6 md:mx-auto justify-between md:px-6 flex md:justify-between md:items-center">
           <div>
             <img
               src={logo}
@@ -146,7 +146,7 @@ const Hero = () => {
           <div className="flex items-center md:block  md:space-x-6">
             <button
               onClick={openModal}
-              className="bg-white text-customOrange font-semibold md:py-2 md:px-4 md:block hidden rounded-full hover:bg-gray-100"
+              className="bg-white text-xs px-2 py-2 mr-4 text-customOrange font-semibold md:py-2 md:px-4 md:block  rounded-full hover:bg-gray-100"
             >
               Contact Us
             </button>
@@ -234,14 +234,14 @@ const Hero = () => {
               >
                 <FiX size={24} />
               </button>
-              <h2 className="text-2xl font-semibold text-center py-4">
+              <h2 className="md:text-2xl  text-lg font-semibold text-center py-4">
                 Have a Question or Suggestion?
               </h2>
             </div>
 
             {/* Content Section */}
             <div className="p-6">
-              <p className="text-center text-gray-500 px-14 -translate-y-3 text-xs mb-4">
+              <p className="text-center text-gray-500 md:px-14 -translate-y-3 text-xs mb-4">
                 Leave us a message and we'll get back to you as soon as
                 possible!
               </p>

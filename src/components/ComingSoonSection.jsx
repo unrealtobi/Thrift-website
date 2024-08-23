@@ -74,16 +74,16 @@ const ComingSoonSection = () => {
         className="md:w-full md:max-w-[1440px] md:mx-auto md:px-6 md:py-16 md:flex md:items-center md:justify-between"
       >
         <div className="md:max-w-lg">
-          <h2 className="md:text-4xl lg:text-4xl text-4xl items-center mt-4 flex justify-center text-center font-bold mb-4">
+          <h2 className="md:text-4xl lg:text-4xl text-4xl items-center mt-8 flex justify-center text-center font-bold mb-4">
             Coming soon to the app store
           </h2>
-          <p className="md:text-lg text-gray-700 text-center md:text-left md:mb-6 px-4 md:px-0 text-lg">
+          <p className="md:text-lg text-gray-700 text-center md:text-left md:mb-6 px-4 md:px-0  mt-8 text-lg">
             Get ready to take your online shopping experience to the next level
             with the MyThrift app. Soon, you'll be able to explore, shop, and
             snag the best thrifted finds right from your phone. Stay tuned and
             be the first to know when we launch!
           </p>
-          <div className="md:flex md:gap-4 flex justify-center md:justify-start mt-6 gap-4">
+          <div className="md:flex md:gap-4 flex justify-center md:justify-start mt-8 gap-4">
             <img
               src={googlePlay}
               alt="Google Play Store"
@@ -97,7 +97,7 @@ const ComingSoonSection = () => {
           </div>
         </div>
 
-        <div className="md:relative flex justify-center md:justify-end mt-6 md:mt-0">
+        <div className="md:relative flex justify-center md:justify-end mt-20 md:mt-0">
           <img
             id="phone-image"
             src={phoneImage}
@@ -114,7 +114,7 @@ const ComingSoonSection = () => {
           <img src={manSoon} alt="MyThrift App" className="h-auto w-auto" />
         </div>
 
-        <div id="coming-soon" className="md:max-w-lg mt-6">
+        <div id="coming-soon" className="md:max-w-lg mt-12">
           <h2 className="text-5xl md:block lg:block hidden font-bold mb-4">
             <span className="text-black">Be the First to</span>
             <br />

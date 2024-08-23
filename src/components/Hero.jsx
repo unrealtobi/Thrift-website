@@ -6,7 +6,7 @@ import ladyImage from "../assets/lady.svg";
 import peopleImg from "../assets/people.svg";
 import toast, { Toaster } from "react-hot-toast";
 import { RotatingLines } from "react-loader-spinner"; // Import the RotatingLines loader
-
+import logo from "./images/mogo.png";
 const Hero = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
@@ -138,7 +138,7 @@ const Hero = () => {
         <div className="container mt-6 md:mx-auto md:px-6 flex md:justify-between md:items-center">
           <div>
             <img
-              src="../src/assets/mogo.png"
+              src={logo}
               alt="My Thrift Logo"
               className="h-6 ml-4"
             />

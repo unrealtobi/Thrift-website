@@ -40,14 +40,14 @@ const AboutMyThrift = () => {
       {
         x: "0%", // Move to the center
         opacity: 1,
-        duration: 5,
+        duration: 10,
         ease: "expo.out", // Use an 'expo.out' easing for a smooth deceleration
         scrollTrigger: {
           trigger: phoneImageRef.current,
           start: "top 80%",
           end: "top 50%",
-          scrub: 1, // Smoothly animate with scroll
-          delay: 0.9, // Adds a slight delay
+          scrub: 10, // Smoothly animate with scroll
+          delay: 900, // Adds a slight delay
         },
       }
     );

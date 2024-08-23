@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { RotatingLines } from "react-loader-spinner";
 import toast, { Toaster } from "react-hot-toast";
 import appStore from "../assets/Group.png";
@@ -10,6 +10,8 @@ const ComingSoonSection = () => {
   const [userType, setUserType] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [loading, setLoading] = useState(false);
+  const [spin, setSpin] = useState(false); // New state for spinning
+  const phoneImageRef = useRef(null);
 
   const handleUserTypeChange = (e) => {
     setUserType(e.target.value);
@@ -23,17 +25,15 @@ const ComingSoonSection = () => {
   const handleWaitlistSubmit = () => {
     const emailInput = document.querySelector('input[type="email"]').value;
 
-    // Simple email validation regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailRegex.test(emailInput)) {
       toast.error("Please enter a valid email address.");
-      return; // Stop submission if email is invalid
+      return;
     }
 
     setLoading(true);
 
-    // Simulate API call
     setTimeout(() => {
       setLoading(false);
       if (inputValue) {
@@ -41,13 +41,38 @@ const ComingSoonSection = () => {
       } else {
         toast.error("Please enter a valid name or store name.");
       }
-    }, 2000); // Simulated delay
+    }, 2000);
   };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setSpin(true);
+        }
+      },
+      {
+        threshold: 0.5, // Trigger when 50% of the section is visible
+      }
+    );
+
+    if (phoneImageRef.current) {
+      observer.observe(phoneImageRef.current);
+    }
+
+    return () => {
+      if (phoneImageRef.current) {
+        observer.unobserve(phoneImageRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div>
-      <section className="md:w-full md:max-w-[1440px] md:mx-auto md:px-6 md:py-16 md:flex md:items-center md:justify-between">
-        {/* Left Side: Text */}
+      <section
+        ref={phoneImageRef}
+        className="md:w-full md:max-w-[1440px] md:mx-auto md:px-6 md:py-16 md:flex md:items-center md:justify-between"
+      >
         <div className="md:max-w-lg">
           <h2 className="md:text-4xl lg:text-4xl text-4xl items-center mt-4 flex justify-center text-center font-bold mb-4">
             Coming soon to the app store
@@ -72,24 +97,23 @@ const ComingSoonSection = () => {
           </div>
         </div>
 
-        {/* Right Side: Phone Image */}
         <div className="md:relative flex justify-center md:justify-end mt-6 md:mt-0">
           <img
             id="phone-image"
             src={phoneImage}
             alt="MyThrift App"
-            className="md:h-auto md:w-auto px-4 md:px-0 spin-animation"
+            className={`md:h-auto md:w-auto px-4 md:px-0 ${
+              spin ? "spin-animation" : ""
+            }`} // Conditionally apply the spin animation
           />
         </div>
       </section>
 
       <section className="w-full max-w-[1440px] mx-auto pb-20 px-6 flex items-center justify-between bg-[url('/src/assets/curveline.png')] bg-no-repeat bg-center">
-        {/* Left Side: image */}
         <div className="relative md:block lg:block hidden">
           <img src={manSoon} alt="MyThrift App" className="h-auto w-auto" />
         </div>
 
-        {/* Right Side: text */}
         <div id="coming-soon" className="md:max-w-lg mt-6">
           <h2 className="text-5xl md:block lg:block hidden font-bold mb-4">
             <span className="text-black">Be the First to</span>
@@ -107,7 +131,6 @@ const ComingSoonSection = () => {
             thrifted and new fashion. Don’t miss out—secure your spot today!
           </p>
 
-          {/* Select who you are */}
           <div className="md:relative md:justify-start flex justify-center text-gray-700 mb-5">
             <select
               className="block appearance-none md:w-full md:max-w-md w-full bg-[#F7F7F7] border text-gray-700 placeholder-gray-500 px-4 py-3 pr-8 rounded-full focus:outline-none focus:border-gray-500"
@@ -130,7 +153,6 @@ const ComingSoonSection = () => {
             </div>
           </div>
 
-          {/* Conditional Input */}
           {userType === "customer" && (
             <div className="mb-4">
               <input
@@ -154,7 +176,6 @@ const ComingSoonSection = () => {
             </div>
           )}
 
-          {/* Email Input */}
           <div className="flex w-full md:block ml-2 lg:block hidden max-w-md">
             <input
               type="email"
@@ -164,7 +185,7 @@ const ComingSoonSection = () => {
             <button
               onClick={handleWaitlistSubmit}
               className="bg-gradient-to-r from-customOrange to-red-500 text-white font-semibold py-3 px-6 rounded-r-full hover:bg-orange-600"
-              disabled={loading} // Disable button while loading
+              disabled={loading}
             >
               {loading ? (
                 <RotatingLines
@@ -189,7 +210,7 @@ const ComingSoonSection = () => {
           <button
             onClick={handleWaitlistSubmit}
             className="bg-gradient-to-r from-customOrange mt-2 to-red-500 text-white font-semibold py-3 px-6 rounded-full md:hidden lg:hidden block w-full hover:bg-orange-600"
-            disabled={loading} // Disable button while loading
+            disabled={loading}
           >
             {loading ? (
               <RotatingLines

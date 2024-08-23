@@ -138,7 +138,7 @@ const Hero = () => {
         <div className="container mt-6 md:mx-auto md:px-6 flex md:justify-between md:items-center">
           <div>
             <img
-              src="../src/assets/logo.png"
+              src="../src/assets/mogo.png"
               alt="My Thrift Logo"
               className="h-6 ml-4"
             />

@@ -4,7 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 import appStore from "../assets/Group.png";
 import googlePlay from "../assets/Group 3.png";
 import phoneImage from "../assets/phone.svg";
-import manSoon from "../assets/mansoon.svg";
+import manSoon from "./images/mansoon.svg";
 
 const ComingSoonSection = () => {
   const [userType, setUserType] = useState("");

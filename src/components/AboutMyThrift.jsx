@@ -1,88 +1,155 @@
-import React from 'react';
-import cart from '../assets/cart.svg'
-import icons from '../assets/icons.svg'
-import shop from '../assets/shop.svg'
-import phone2 from '../assets/phone2.svg'
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger"; // Import ScrollTrigger
+import cart from "../assets/cart.svg";
+import icons from "../assets/icons.svg";
+import shop from "../assets/shop.svg";
+import phone2 from "../assets/phone2.svg";
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 const AboutMyThrift = () => {
+  const cardsRef = useRef([]);
+  const phoneImageRef = useRef(null);
+
+  useEffect(() => {
+    // Animate the cards with increased delay
+    gsap.fromTo(
+      cardsRef.current,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: 0.5, // Increased delay for card animation
+        stagger: 0.5, // Increased stagger between cards
+        scrollTrigger: {
+          trigger: cardsRef.current,
+          start: "top 80%",
+          end: "bottom 60%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+
+    // Animate the phone image from right to center
+    gsap.fromTo(
+      phoneImageRef.current,
+      { x: "100%", opacity: 0 }, // Start from the right outside of the view
+      {
+        x: "0%", // Move to the center
+        opacity: 1,
+        duration: 5,
+        ease: "expo.out", // Use an 'expo.out' easing for a smooth deceleration
+        scrollTrigger: {
+          trigger: phoneImageRef.current,
+          start: "top 80%",
+          end: "top 50%",
+          scrub: 1, // Smoothly animate with scroll
+          delay: 0.9, // Adds a slight delay
+        },
+      }
+    );
+  }, []);
+
   return (
-     <div className=" ">
-        <section className="w-full max-w-[1440px] h-[600px] gap-6  mx-auto py-14 flex justify-center ">
-            <div className='w-10/12 ml-16'>
-                <img src={phone2} alt="" />
-            </div>
-      <div className="ml-6 mt-32">
-        <h2 className="text-4xl font-bold">
-          <span className="text-black">What is </span>
+    <div className="md:-translate-y-12">
+      {/* Introduction Section */}
+      <section className="md:w-full md:max-w-[1440px] md:h-[600px] mt-20 pb-20 md:gap-6 gap-5  md:mx-auto md:py-14 md:flex justify-center">
+        <div
+          className="md:w-10/12 lg:w-10/12 md:ml-16 lg:ml-16 md:block lg:block hidden"
+          ref={phoneImageRef}
+        >
+          <img src={phone2} alt="Phone" />
+        </div>
+        <div className="md:ml-6 lg:ml-6 lg:mt-32 -translate-y-12 md:text-left lg:text-left flex justify-center text-center   flex-col md:mt-32">
+          <h2 className="text-4xl font-bold">
+            <span className="text-black">What is </span>
+            <span className="text-customOrange">My Thrift?</span>
+          </h2>
+          <p className="md:mt-4 lg:mt-4 mt-7 p-3- text-gray-600 md:text-lg lg:text-lg md:max-w-full lg:max-w-full lg:mr-16 md:mr-16">
+            My Thrift is an app that lets you discover and buy a wide range of
+            unique thrifted and new clothes. You can explore items from local
+            sellers and online stores all in one place. It’s designed to make
+            shopping for fashion simple and convenient, so you can find great
+            clothes from the comfort of your home. Whether you're looking for
+            something special from a nearby market or an exclusive piece from an
+            online store, My Thrift makes it easy to shop and enjoy.
+          </p>
+          
+        </div>
+        <div className="md:w-10/12 lg:w-10/12 translate-y-1 md:ml-16 lg:ml-16 md:hidden lg:hidden">
+          <img src={phone2} alt="Phone" />
+        </div>
+      </section>
+
+      {/* Cards Section */}
+      <section className="bg-[#F7F7F7] py-14">
+        <h2 className="text-4xl font-bold text-center mb-7">
+          <span className="text-black">What Can I do With </span>
           <span className="text-customOrange">My Thrift?</span>
         </h2>
-        <p className="mt-4 text-gray-600 max-w-full mr-16 ">
-          MyThrift is an app that lets you discover and buy a wide range of
-          unique thrifted and new clothes. You can explore items from local
-          sellers and online stores all in one place. It’s designed to make
-          shopping for fashion simple and convenient, so you can find great
-          clothes from the comfort of your home. Whether you're looking for
-          something special from a nearby market or an exclusive piece from an
-          online store, MyThrift makes it easy to shop and enjoy.
-        </p>
-      </div>
-    </section>
-
-        {/* Cards Section */}
-        <section className='bg-[#F7F7F7] py-14'>
-  <h2 className="text-4xl font-bold text-center mb-7">
-    <span className="text-black">What Can I do With </span>
-    <span className="text-customOrange">My Thrift?</span>
-  </h2>
-  <div className="p-7 flex flex-col lg:flex-row justify-around items-center space-y-2 lg:space-y-0 lg:space-x-0">
-    {/* Card 1 */}
-     {/* Card 1 */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 text-center mb-8  lg:mb-0 lg:w-80">
+        <div className="p-7 flex flex-col lg:flex-row justify-around items-center lg:space-y-0 lg:space-x-0">
+          {/* Card 1 */}
+          <div
+            className="bg-white rounded-2xl shadow-lg p-8 text-center mb-8 lg:mb-0 lg:w-80"
+            ref={(el) => (cardsRef.current[0] = el)}
+          >
             <div className="bg-blue-100 rounded-full p-4 inline-block mb-4">
-             <img src={cart} alt="" />
-
+              <img src={cart} alt="Cart" />
             </div>
-            <h3 className="text-xl font-semibold text-gray-800">Shop Thrifted & New Clothes</h3>
+            <h3 className="text-xl font-semibold text-gray-800">
+              Shop Thrifted & New Clothes
+            </h3>
             <p className="mt-4 text-gray-600">
-              Shop a diverse selection of thrifted and new clothing from local markets and online vendors, all in one place.
+              Shop a diverse selection of thrifted and new clothing from local
+              markets and online vendors, all in one place.
             </p>
           </div>
 
           {/* Card 2 */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 text-center mb-8 lg:mb-0 lg:w-80">
+          <div
+            className="bg-white rounded-2xl shadow-lg p-7 text-center mb-8 lg:mb-0 lg:w-80"
+            ref={(el) => (cardsRef.current[1] = el)}
+          >
             <div className="bg-purple-100 rounded-full p-4 inline-block mb-4">
-            <img src={shop} alt="" />
+              <img src={shop} alt="Shop" />
             </div>
-            <h3 className="text-xl font-semibold text-gray-800">Showcase your Business</h3>
+            <h3 className="text-xl font-semibold text-gray-800">
+              Showcase your Business
+            </h3>
             <p className="mt-4 text-gray-600">
-              Register your business with us and display your thrifted or new clothing on our app. Reach a wide audience and sell to people with ease.
+              Register your business with us and display your products on our
+              app. Reach a wide audience and sell to people with ease.
             </p>
           </div>
 
           {/* Card 3 */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 text-center mb-8  lg:mb-0 lg:w-80">
+          <div
+            className="bg-white rounded-2xl shadow-lg p-7 text-center lg:mb-0 lg:w-80"
+            ref={(el) => (cardsRef.current[2] = el)}
+          >
             <div className="bg-yellow-100 rounded-full p-4 inline-block mb-4">
-            <img src={icons} alt="" />
-
+              <img src={icons} alt="Icons" className="w-16 h-16" />
             </div>
-            <h3 className="text-xl font-semibold text-gray-800">Seamless Shopping</h3>
+            <h3 className="text-xl font-semibold text-gray-800">
+              Seamless Shopping
+            </h3>
             <p className="mt-4 text-gray-600">
-              Shop from the comfort of your home with secure payments, real-time order tracking, and a smooth, user-friendly experience.
+              Shop from the comfort of your home with secure payments, real-time
+              order tracking, and a smooth, user-friendly experience.
             </p>
           </div>
         </div>
-        </section>
+        
+      </section>
 
-       
-       {/* Cards Section End */}
-
- {/* {cooming soon section} */}
- <section>
-
- </section>
-
-      </div>
-  
+      {/* Coming Soon Section */}
+      <section>
+        {/* Content for coming soon section can be added here */}
+      </section>
+    </div>
   );
 };
 

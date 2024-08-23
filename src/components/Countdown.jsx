@@ -15,21 +15,21 @@ const Countdown = () => {
   }, []);
 
   return (
-    <div className="bg-customOrange min-h-96 flex flex-col justify-center items-center relative bg-[url('/src/assets/frame43.png')] bg-no-repeat bg-cover bg-center">
-      <h1 className="text-white text-3xl font-bold mb-2 mt-7">We are still cooking this project</h1>
+    <div className="bg-customOrange md:min-h-96 md:flex md:flex-col md:justify-center md:items-center relative bg-[url('/src/assets/frame43.png')] bg-no-repeat pb-10 bg-cover bg-center">
+      {/* <h1 className="text-white md:text-3xl text-xl text-center font-bold mb-2 md:mt-7 pt-8">We are working to bring my thrift as soon as possible</h1> */}
       {/* <p className="text-white text-xs mb-">While you wait, join the waitlist. My Thrift will launch in:</p> */}
       
       {/* Countdown Timer */}
-      <div className="flex w-8/12 justify-center ">
+      <div className="flex md:w-8/12 text-2xl translate-y-5 justify-center ">
         <a href="https://logwork.com/countdown-gpmd" 
-           className="countdown-timer"
+           className="countdown-timer "
            data-timezone="Africa/Lagos" 
            data-textcolor="#ffffff"
-           data-date="2024-09-14 20:32" 
+           data-date="2024-12-20 20:32" 
            data-background="#f99575"
            data-digitscolor="#ffffff"
            data-unitscolor="#fafafa" >
-          While you wait, join the waitlist. My Thrift will launch in:
+          Join the waitlist. My Thrift will launch in:
         </a>
       </div>
     </div>

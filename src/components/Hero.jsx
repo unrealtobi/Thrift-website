@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { FiX } from "react-icons/fi"; // Import the X icon
-import ladyImage from "../assets/lady.svg";
-import peopleImg from "../assets/people.svg";
+import ladyImage from "./images/lady.svg";
+import peopleImg from "./images/people.svg";
 import toast, { Toaster } from "react-hot-toast";
 import { RotatingLines } from "react-loader-spinner"; // Import the RotatingLines loader
 import logo from "./images/mogo.png";

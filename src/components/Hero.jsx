@@ -190,7 +190,7 @@ const Hero = () => {
               ref={buttonRef}
             >
               <img
-                src={peopleImg}
+                src="https://res.cloudinary.com/dtaqusjav/image/upload/v1724414014/people_aenuc1.svg"
                 alt="People icons"
                 className="h-9 translate-y-2"
               />

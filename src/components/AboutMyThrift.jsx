@@ -1,12 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger"; // Import ScrollTrigger
+import ScrollTrigger from "gsap/ScrollTrigger";
 import cart from "../assets/cart.svg";
 import icons from "../assets/cons.svg";
 import shop from "../assets/shop.svg";
 import phone2 from "../assets/phone2.svg";
 
-// Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
 const AboutMyThrift = () => {
@@ -14,7 +13,6 @@ const AboutMyThrift = () => {
   const phoneImageRef = useRef(null);
 
   useEffect(() => {
-    // Animate the cards with increased delay
     gsap.fromTo(
       cardsRef.current,
       { opacity: 0, y: 50 },
@@ -22,8 +20,8 @@ const AboutMyThrift = () => {
         opacity: 1,
         y: 0,
         duration: 1,
-        delay: 0.5, // Increased delay for card animation
-        stagger: 0.5, // Increased stagger between cards
+        delay: 0.5, 
+        stagger: 0.5,
         scrollTrigger: {
           trigger: cardsRef.current,
           start: "top 80%",
@@ -33,21 +31,21 @@ const AboutMyThrift = () => {
       }
     );
 
-    // Animate the phone image from right to center
+    
     gsap.fromTo(
       phoneImageRef.current,
-      { x: "100%", opacity: 0 }, // Start from the right outside of the view
+      { x: "100%", opacity: 0 }, 
       {
-        x: "0%", // Move to the center
+        x: "0%",
         opacity: 1,
         duration: 10,
-        ease: "expo.out", // Use an 'expo.out' easing for a smooth deceleration
+        ease: "expo.out", 
         scrollTrigger: {
           trigger: phoneImageRef.current,
           start: "top 80%",
           end: "top 50%",
-          scrub: 10, // Smoothly animate with scroll
-          delay: 900, // Adds a slight delay
+          scrub: 10, 
+          delay: 900, 
         },
       }
     );
@@ -69,15 +67,12 @@ const AboutMyThrift = () => {
             <span className="text-customOrange">My Thrift?</span>
           </h2>
           <p className="md:mt-4 lg:mt-4 mt-7 p-4 text-gray-600 md:text-lg lg:text-lg md:max-w-full lg:max-w-full lg:mr-16 md:mr-16">
-            My Thrift is an app that lets you discover and buy a wide range of
-            unique thrifted and new clothes. You can explore items from local
-            sellers and online stores all in one place. It’s designed to make
-            shopping for fashion simple and convenient, so you can find great
-            clothes from the comfort of your home. Whether you're looking for
-            something special from a nearby market or an exclusive piece from an
-            online store, My Thrift makes it easy to shop and enjoy.
+            My Thrift is an app for discovering and purchasing thrifted and new
+            clothes from local sellers and online stores. It simplifies fashion
+            shopping by offering a wide range of unique items in one convenient
+            platform, allowing you to find great clothes from home. We know, its
+            very demure and mindful right?
           </p>
-          
         </div>
         <div className="md:w-10/12 lg:w-10/12 translate-y-1 md:ml-16 lg:ml-16 md:hidden lg:hidden">
           <img src={phone2} alt="Phone" />
@@ -142,13 +137,9 @@ const AboutMyThrift = () => {
             </p>
           </div>
         </div>
-        
       </section>
 
-      {/* Coming Soon Section */}
-      <section>
-        {/* Content for coming soon section can be added here */}
-      </section>
+     
     </div>
   );
 };

@@ -2,17 +2,22 @@ import React, { useEffect } from 'react';
 
 const Countdown = () => {
   useEffect(() => {
-    // Dynamically load the external countdown script
+
     const script = document.createElement('script');
     script.src = "https://cdn.logwork.com/widget/countdown.js";
     script.async = true;
     document.body.appendChild(script);
 
     return () => {
-      // Cleanup script to avoid memory leaks
+
       document.body.removeChild(script);
     };
   }, []);
+
+  const disableOnClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
 
   return (
     <div className="bg-customOrange md:min-h-96 md:flex md:flex-col md:justify-center md:items-center relative bg-[url('/src/assets/frame43.png')] bg-no-repeat pb-10 bg-cover bg-center">
@@ -28,7 +33,8 @@ const Countdown = () => {
            data-date="2024-12-20 20:32" 
            data-background="#f99575"
            data-digitscolor="#ffffff"
-           data-unitscolor="#fafafa" >
+           data-unitscolor="#fafafa"
+           onClick={disableOnClick} >
           Join the waitlist. My Thrift will launch in:
         </a>
       </div>

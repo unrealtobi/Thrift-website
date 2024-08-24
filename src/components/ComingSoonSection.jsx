@@ -10,7 +10,7 @@ const ComingSoonSection = () => {
   const [userType, setUserType] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [loading, setLoading] = useState(false);
-  const [spin, setSpin] = useState(false); // New state for spinning
+  const [spin, setSpin] = useState(false); 
   const phoneImageRef = useRef(null);
 
   const handleUserTypeChange = (e) => {
@@ -52,7 +52,7 @@ const ComingSoonSection = () => {
         }
       },
       {
-        threshold: 0.5, // Trigger when 50% of the section is visible
+        threshold: 0.5, 
       }
     );
 
@@ -104,14 +104,14 @@ const ComingSoonSection = () => {
             alt="MyThrift App"
             className={`md:h-auto md:w-auto px-4 md:px-0 ${
               spin ? "spin-animation" : ""
-            }`} // Conditionally apply the spin animation
+            }`} 
           />
         </div>
       </section>
 
       <section className="w-full max-w-[1440px] mx-auto pb-20 px-6 flex items-center justify-between bg-[url('/src/assets/curveline.png')] bg-no-repeat bg-center">
         <div className="relative md:block lg:block hidden">
-          <img src={manSoon} alt="MyThrift App" className="h-auto w-auto" />
+          <img src="https://res.cloudinary.com/dtaqusjav/image/upload/v1724415304/mansoon_msyshp.svg" alt="MyThrift App" className="h-auto w-auto" />
         </div>
 
         <div id="coming-soon" className="md:max-w-lg mt-12">

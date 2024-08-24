@@ -6,6 +6,7 @@ import AboutMyThrift from './components/AboutMyThrift'
 import ComingSoonSection from './components/ComingSoonSection'
 import FAQs from './components/FAQS'
 import Countdown from './components/Countdown'
+import Footer from './components/Footer'
 
 function App() {
   
@@ -17,6 +18,7 @@ function App() {
       <ComingSoonSection></ComingSoonSection>
       <FAQs></FAQs>
       <Countdown></Countdown>
+      <Footer/>
     </div>
   )
 }

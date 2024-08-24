@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
-import { FiX } from "react-icons/fi"; // Import the X icon
+import { FiX, FiMenu } from "react-icons/fi"; // Import the X and Menu icons
 import ladyImage from "./images/lady.svg";
 import peopleImg from "./images/people.svg";
 import toast, { Toaster } from "react-hot-toast";
 import { RotatingLines } from "react-loader-spinner"; // Import the RotatingLines loader
 import logo from "./images/mogo.png";
+
 const Hero = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for the hamburger menu
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
@@ -17,6 +19,7 @@ const Hero = () => {
   const imageRef = useRef(null);
   const buttonRef = useRef(null);
   const modalRef = useRef(null);
+  const sideMenuRef = useRef(null); // Ref for the side menu
   const animationPlayed = useRef(false); // To ensure the animation plays only once
 
   useEffect(() => {
@@ -74,6 +77,23 @@ const Hero = () => {
       ease: "back.in(1.7)",
       onComplete: () => setIsModalOpen(false),
     });
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+    if (!isMenuOpen) {
+      gsap.to(sideMenuRef.current, {
+        x: 0,
+        duration: 0.5,
+        ease: "power3.out",
+      });
+    } else {
+      gsap.to(sideMenuRef.current, {
+        x: "-100%",
+        duration: 0.5,
+        ease: "power3.in",
+      });
+    }
   };
 
   const handleSendMessage = () => {
@@ -137,22 +157,59 @@ const Hero = () => {
       <nav className="sticky top-0 z-50">
         <div className="container mt-6 md:mx-auto justify-between md:px-6 flex md:justify-between md:items-center">
           <div>
-            <img
-              src={logo}
-              alt="My Thrift Logo"
-              className="h-6 ml-4"
-            />
+            <img src={logo} alt="My Thrift Logo" className="h-6 ml-4" />
           </div>
-          <div className="flex items-center md:block  md:space-x-6">
+          <div className="flex items-center md:hidden">
+            {" "}
+            {/* Hide this on desktop */}
+            <button
+              aria-expanded={isMenuOpen}
+              aria-controls="side-menu"
+              onClick={toggleMenu}
+              className="text-white text-3xl mr-4"
+            >
+              <FiMenu />
+            </button>
+          </div>
+          <div className="hidden md:flex items-center md:space-x-6">
+            {" "}
+            {/* Show on desktop */}
             <button
               onClick={openModal}
-              className="bg-white text-xs px-2 py-2 mr-4 text-customOrange font-semibold md:py-2 md:px-4 md:block  rounded-full hover:bg-gray-100"
+              className="bg-white text-xs px-2 py-2 mr-4 text-customOrange font-semibold md:py-2 md:px-4 rounded-full hover:bg-gray-100"
             >
               Contact Us
             </button>
           </div>
         </div>
       </nav>
+
+      {/* Side Menu */}
+      <div
+        ref={sideMenuRef}
+        className="fixed top-0 left-0 h-full w-64 bg-black opacity-95 text-white z-50 transform -translate-x-full"
+      >
+        <button
+          onClick={toggleMenu}
+          className="absolute top-4 right-4 text-white"
+        >
+          <FiX size={24} />
+        </button>
+        <ul className="mt-20 ml-6 space-y-4">
+          <li>
+            <button
+              onClick={() => {
+                toggleMenu();
+                openModal();
+              }}
+              className="text-white text-xl"
+            >
+              Contact Us
+            </button>
+          </li>
+          {/* Add more menu items here if needed */}
+        </ul>
+      </div>
 
       <div className="container mx-auto md:px-6 px-6 text-center lg:text-left">
         <div className="lg:flex lg:items-center">
@@ -195,7 +252,7 @@ const Hero = () => {
                 className="h-9 translate-y-2"
               />
               <button
-                onClick={handleScrollToWaitlist} // Attach scroll handler
+                onClick={handleScrollToWaitlist}
                 className="bg-white text-customOrange h-12 px-4 font-semibold md:py-2 md:h-12 md:px-8 rounded-full hover:bg-gray-100"
               >
                 Join the Waitlist
@@ -204,11 +261,11 @@ const Hero = () => {
           </div>
 
           <div
-            className="md:w-full w-full md:mt-28 flex justify-center items-center translate-y-1 md:h-full opacity-0 transform translate-y-12"
+            className="md:w-full w-full md:mt-28 flex justify-center items-center md:h-full opacity-0 transform"
             ref={imageRef}
           >
             <img
-              src={ladyImage}
+              src="https://res.cloudinary.com/dtaqusjav/image/upload/v1724414267/lady_ik5jfl.svg"
               alt="Happy shopper with bags"
               className="md:w-auto md:h-full rounded-lg"
             />

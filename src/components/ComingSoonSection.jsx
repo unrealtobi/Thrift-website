@@ -27,25 +27,51 @@ const ComingSoonSection = () => {
     setEmail(e.target.value);
   };
 
-  const handleWaitlistSubmit = () => {
+  const handleWaitlistSubmit = async () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
+  
     if (!emailRegex.test(email)) {
       toast.error("Please enter a valid email address.");
       return;
     }
-
+  
+    if (!inputValue) {
+      toast.error("Please enter a valid name or store name.");
+      return;
+    }
+  
     setLoading(true);
-
-    setTimeout(() => {
-      setLoading(false);
-      if (inputValue) {
+  
+    try {
+      const response = await fetch('https://mythriftwaitlist.fly.dev/api/v1/sendmail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: inputValue,
+          email: email,
+          type: userType,
+        }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
         toast.success("Successfully joined the waitlist!");
+      } else if (response.status === 409) {
+        toast.error("Email has already been registered, Thank you.");
       } else {
-        toast.error("Please enter a valid name or store name.");
+        toast.error(`Failed to join the waitlist: ${data.message || 'Unknown error'}`);
       }
-    }, 2000);
+    } catch (error) {
+      toast.error(`An error occurred: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
   };
+  
+  
 
   useEffect(() => {
     const observer = new IntersectionObserver(

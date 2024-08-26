@@ -98,28 +98,48 @@ const Hero = () => {
     }
   };
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (!isAnonymous && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       toast.error("Please enter a valid email address.");
       return;
     }
-
+  
     if (!message.trim()) {
       toast.error("Please enter a message.");
       return;
     }
-
+  
     setIsLoading(true);
-
-    setTimeout(() => {
-      toast.success("Message sent successfully!");
-      closeModal();
-      setEmail("");
-      setMessage("");
-      setIsAnonymous(false);
+  
+    try {
+      const response = await fetch("https://mythriftwaitlist.fly.dev/api/v1/contactus", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: isAnonymous ? "Anonymous" : `From: ${email}\nMessage: ${message}`,
+        }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        toast.success("Message sent successfully!");
+        closeModal();
+        setEmail("");
+        setMessage("");
+        setIsAnonymous(false);
+      } else {
+        toast.error(`Failed to send message: ${data.message || 'Unknown error'}`);
+      }
+    } catch (error) {
+      toast.error(`An error occurred: ${error.message}`);
+    } finally {
       setIsLoading(false);
-    }, 2000);
+    }
   };
+  
 
   const handleScrollToWaitlist = () => {
     const waitlistSection = document.getElementById("coming-soon");
@@ -133,7 +153,7 @@ const Hero = () => {
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
     }
-    toggleMenu(); // Close the sidebar after scrolling
+    toggleMenu(); 
   };
 
   const containerVariants = {
@@ -194,10 +214,12 @@ const Hero = () => {
         ref={sideMenuRef}
         className="fixed top-0 left-0 h-full w-full text-white z-50 transform -translate-x-full"
         style={{
-          backdropFilter: "blur(10px)", // Frosted glass effect
+          backdropFilter: "blur(10px)",
+          backgroundColor: "rgba(0, 0, 0, 0.9)",
           background:
             "linear-gradient(to bottom, rgba(249, 83, 30, 0.8) 1%, rgba(0, 0, 0, 0.7) 10%, rgba(0, 0, 0, 0.9) 100%)",
         }}
+        
       >
         <div className="flex flex-col justify-between h-full">
           {/* Top Section: Branding and Close Button */}
@@ -213,7 +235,7 @@ const Hero = () => {
             <li>
               <button
                 onClick={() => handleScrollToSection("about-us")}
-                className="text-white inline-block py-2 border-b border-white hover:text-customOrange hover:transform hover:scale-105 transition-all duration-100"
+                className="text-white inline-block py-2 font-medium  border-b border-white hover:text-customOrange hover:transform hover:scale-105 transition-all duration-100"
               >
                 About Us
               </button>
@@ -222,7 +244,7 @@ const Hero = () => {
             <li>
               <button
                 onClick={() => handleScrollToSection("faq-section")}
-                className="text-white inline-block py-2 border-b border-white hover:text-customOrange hover:transform hover:scale-105 transition-all duration-100"
+                className="text-white inline-block py-2 border-b font-medium border-white hover:text-customOrange hover:transform hover:scale-105 transition-all duration-100"
               >
                 FAQ
               </button>
@@ -234,7 +256,7 @@ const Hero = () => {
                   toggleMenu();
                   openModal();
                 }}
-                className="text-white inline-block py-2 border-b border-white hover:text-customOrange hover:transform hover:scale-105 transition-all duration-100"
+                className="text-white inline-block py-2 border-b font-medium border-white hover:text-customOrange hover:transform hover:scale-105 transition-all duration-100"
               >
                 Contact Us
               </button>

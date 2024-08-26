@@ -30,7 +30,7 @@ const Countdown = () => {
            className="countdown-timer "
            data-timezone="Africa/Lagos" 
            data-textcolor="#ffffff"
-           data-date="2024-12-20 20:32" 
+           data-date="2024-11-20 20:32" 
            data-background="#f99575"
            data-digitscolor="#ffffff"
            data-unitscolor="#fafafa"

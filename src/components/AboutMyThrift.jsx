@@ -4,7 +4,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import cart from "../assets/cart.svg";
 import icons from "../assets/cons.svg";
 import shop from "../assets/shop.svg";
-import phone2 from "../assets/phone2.svg";
+import phone2 from "./images/two phones.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -45,7 +45,7 @@ const AboutMyThrift = () => {
           start: "top 80%",
           end: "top 50%",
           scrub: 10, 
-          delay: 900, 
+          delay: 9, 
         },
       }
     );
@@ -54,7 +54,7 @@ const AboutMyThrift = () => {
   return (
     <div className="md:-translate-y-12">
       {/* Introduction Section */}
-      <section className="md:w-full md:max-w-[1440px] md:h-[600px] mt-20 pb-20 md:gap-6 gap-5  md:mx-auto md:py-14 md:flex justify-center">
+      <section className="md:w-full md:max-w-[1440px] md:h-[600px] mt-20 pb-20 md:gap-6 gap-5  md:mx-auto md:py-14 md:flex justify-center" id="about-us">
         <div
           className="md:w-10/12 lg:w-10/12 md:ml-16 lg:ml-16 md:block lg:block hidden"
           ref={phoneImageRef}
@@ -68,7 +68,7 @@ const AboutMyThrift = () => {
           </h2>
           <p className="md:mt-4 lg:mt-4 mt-7 p-4 text-gray-600 md:text-lg lg:text-lg md:max-w-full lg:max-w-full lg:mr-16 md:mr-16">
             My Thrift is an app for discovering and purchasing thrifted and new
-            clothes from local sellers and online stores. It simplifies fashion
+            clothes from local vendors and online stores. It simplifies fashion
             shopping by offering a wide range of unique items in one convenient
             platform, allowing you to find great clothes from home. We know, its
             very demure and mindful right?

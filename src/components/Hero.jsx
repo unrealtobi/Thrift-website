@@ -1,26 +1,31 @@
 import React, { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 import { gsap } from "gsap";
-import { FiX, FiMenu } from "react-icons/fi"; // Import the X and Menu icons
-import ladyImage from "./images/lady.svg";
-import peopleImg from "./images/people.svg";
+import { FiX } from "react-icons/fi";
+import { RiMenu3Line } from "react-icons/ri";
 import toast, { Toaster } from "react-hot-toast";
-import { RotatingLines } from "react-loader-spinner"; // Import the RotatingLines loader
+import { RotatingLines } from "react-loader-spinner";
 import logo from "./images/mogo.png";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faInstagram,
+  faTwitter,
+  faLinkedin,
+} from "@fortawesome/free-brands-svg-icons";
+import { motion } from "framer-motion";
+import womanpic from "./images/girlie.png";
 const Hero = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for the hamburger menu
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // Add a state for loading
+  const [isLoading, setIsLoading] = useState(false);
   const textRef = useRef(null);
   const imageRef = useRef(null);
   const buttonRef = useRef(null);
   const modalRef = useRef(null);
-  const sideMenuRef = useRef(null); // Ref for the side menu
-  const animationPlayed = useRef(false); // To ensure the animation plays only once
+  const sideMenuRef = useRef(null);
+  const animationPlayed = useRef(false);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -41,15 +46,12 @@ const Hero = () => {
           textRef.current.offsetTop - window.innerHeight * 0.75;
 
         if (scrollPosition > elementPosition) {
-          // Animate text
           gsap.to(textRef.current, { opacity: 1, y: 0, duration: 1 });
-          // Animate image
           gsap.to(imageRef.current, { opacity: 1, y: 0, duration: 1 });
-          // Animate button
           gsap.to(buttonRef.current, { opacity: 1, y: 0, duration: 1 });
 
-          animationPlayed.current = true; // Mark the animation as played
-          window.removeEventListener("scroll", handleScroll); // Remove the scroll listener
+          animationPlayed.current = true;
+          window.removeEventListener("scroll", handleScroll);
         }
       }
     };
@@ -63,10 +65,10 @@ const Hero = () => {
     setTimeout(() => {
       gsap.fromTo(
         modalRef.current,
-        { scale: 0, opacity: 0 }, // Start small and transparent
-        { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.7)" } // Pop out effect
+        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.7)" }
       );
-    }, 0); // Run animation immediately after modal is opened
+    }, 0);
   };
 
   const closeModal = () => {
@@ -107,16 +109,15 @@ const Hero = () => {
       return;
     }
 
-    setIsLoading(true); // Start loading
+    setIsLoading(true);
 
-    // Simulate API call for message sending
     setTimeout(() => {
       toast.success("Message sent successfully!");
-      closeModal(); // Close modal after sending message
-      setEmail(""); // Reset email input
-      setMessage(""); // Reset message input
-      setIsAnonymous(false); // Reset anonymous checkbox
-      setIsLoading(false); // Stop loading
+      closeModal();
+      setEmail("");
+      setMessage("");
+      setIsAnonymous(false);
+      setIsLoading(false);
     }, 2000);
   };
 
@@ -125,6 +126,14 @@ const Hero = () => {
     if (waitlistSection) {
       waitlistSection.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const handleScrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+    toggleMenu(); // Close the sidebar after scrolling
   };
 
   const containerVariants = {
@@ -157,23 +166,19 @@ const Hero = () => {
       <nav className="sticky top-0 z-50">
         <div className="container mt-6 md:mx-auto justify-between md:px-6 flex md:justify-between md:items-center">
           <div>
-            <img src={logo} alt="My Thrift Logo" className="h-6 ml-4" />
+            <img src={logo} alt="My Thrift Logo" className="h-5 ml-4" />
           </div>
           <div className="flex items-center md:hidden">
-            {" "}
-            {/* Hide this on desktop */}
             <button
               aria-expanded={isMenuOpen}
               aria-controls="side-menu"
               onClick={toggleMenu}
-              className="text-white text-3xl mr-4"
+              className="text-white text-2xl mr-4"
             >
-              <FiMenu />
+              <RiMenu3Line />
             </button>
           </div>
           <div className="hidden md:flex items-center md:space-x-6">
-            {" "}
-            {/* Show on desktop */}
             <button
               onClick={openModal}
               className="bg-white text-xs px-2 py-2 mr-4 text-customOrange font-semibold md:py-2 md:px-4 rounded-full hover:bg-gray-100"
@@ -187,28 +192,85 @@ const Hero = () => {
       {/* Side Menu */}
       <div
         ref={sideMenuRef}
-        className="fixed top-0 left-0 h-full w-64 bg-black opacity-95 text-white z-50 transform -translate-x-full"
+        className="fixed top-0 left-0 h-full w-full text-white z-50 transform -translate-x-full"
+        style={{
+          backdropFilter: "blur(10px)", // Frosted glass effect
+          background:
+            "linear-gradient(to bottom, rgba(249, 83, 30, 0.8) 1%, rgba(0, 0, 0, 0.7) 10%, rgba(0, 0, 0, 0.9) 100%)",
+        }}
       >
-        <button
-          onClick={toggleMenu}
-          className="absolute top-4 right-4 text-white"
-        >
-          <FiX size={24} />
-        </button>
-        <ul className="mt-20 ml-6 space-y-4">
-          <li>
-            <button
-              onClick={() => {
-                toggleMenu();
-                openModal();
-              }}
-              className="text-white text-xl"
-            >
-              Contact Us
+        <div className="flex flex-col justify-between h-full">
+          {/* Top Section: Branding and Close Button */}
+          <div className="flex justify-end  px-6 mt-6">
+            {/* <img src={logo} alt="My Thrift Logo" className="h-5" /> */}
+            <button onClick={toggleMenu} className="text-white">
+              <FiX size={24} />
             </button>
-          </li>
-          {/* Add more menu items here if needed */}
-        </ul>
+          </div>
+
+          {/* Middle Section: Navigation Links */}
+          <ul className="flex flex-col items-center justify-center space-y-6 text-xl">
+            <li>
+              <button
+                onClick={() => handleScrollToSection("about-us")}
+                className="text-white inline-block py-2 border-b border-white hover:text-customOrange hover:transform hover:scale-105 transition-all duration-100"
+              >
+                About Us
+              </button>
+            </li>
+
+            <li>
+              <button
+                onClick={() => handleScrollToSection("faq-section")}
+                className="text-white inline-block py-2 border-b border-white hover:text-customOrange hover:transform hover:scale-105 transition-all duration-100"
+              >
+                FAQ
+              </button>
+            </li>
+
+            <li>
+              <button
+                onClick={() => {
+                  toggleMenu();
+                  openModal();
+                }}
+                className="text-white inline-block py-2 border-b border-white hover:text-customOrange hover:transform hover:scale-105 transition-all duration-100"
+              >
+                Contact Us
+              </button>
+            </li>
+          </ul>
+
+          {/* Bottom Section: Social Media Icons */}
+          <div className="flex justify-center mb-8">
+            <div className="flex space-x-8">
+              <a
+                href="https://www.instagram.com/mythriftng?igsh=MTFzM2tkMXp2Z2RpYg=="
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-customOrange hover:transform hover:scale-105 transition-all duration-100"
+              >
+                <FontAwesomeIcon icon={faInstagram} size="lg" />
+              </a>
+              <a
+                href="https://x.com/mythriftng"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-customOrange hover:transform hover:scale-105 transition-all duration-200"
+              >
+                <FontAwesomeIcon icon={faTwitter} size="lg" />
+              </a>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-customOrange hover:transform hover:scale-105 transition-all duration-200"
+              >
+                <FontAwesomeIcon icon={faLinkedin} size="lg" />
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="container mx-auto md:px-6 px-6 text-center lg:text-left">
@@ -238,8 +300,10 @@ const Hero = () => {
             >
               Step into a world of affordable thrifted (okrika) finds with My
               Thrift – your online gateway to the best local markets and
-              vendors. Explore, shop, and discover rare gems, all from the
-              comfort of your home.
+              vendors. Explore, shop, and discover the most affordable products,
+              including maxi skirts, cargo pants, tees, and much more, all from
+              the comfort of your home. Discover new vendors with awesome
+              products at better prices.
             </p>
 
             <div
@@ -261,13 +325,13 @@ const Hero = () => {
           </div>
 
           <div
-            className="md:w-full w-full md:mt-28 flex justify-center items-center md:h-full opacity-0 transform"
+            className="md:w-full w-full md:mt-20  flex justify-center items-center md:h-full opacity-0 transform"
             ref={imageRef}
           >
             <img
-              src="https://res.cloudinary.com/dtaqusjav/image/upload/v1724414267/lady_ik5jfl.svg"
+              src={womanpic}
               alt="Happy shopper with bags"
-              className="md:w-auto md:h-full rounded-lg"
+              className="md:w-auto md:h-full w-3/4 h-auto rounded-lg"
             />
           </div>
         </div>
@@ -283,7 +347,6 @@ const Hero = () => {
             ref={modalRef}
             className="relative bg-white rounded-lg shadow-lg z-10 w-11/12 md:w-1/3"
           >
-            {/* Header Section with Full Width Orange Background */}
             <div className="relative bg-customOrange py-2 text-white rounded-t-lg">
               <button
                 onClick={closeModal}
@@ -291,38 +354,34 @@ const Hero = () => {
               >
                 <FiX size={24} />
               </button>
-              <h2 className="md:text-2xl  text-lg font-semibold text-center py-4">
+              <h2 className="md:text-2xl text-lg font-semibold text-center py-4">
                 Have a Question or Suggestion?
               </h2>
             </div>
 
-            {/* Content Section */}
             <div className="p-6">
               <p className="text-center text-gray-500 md:px-14 -translate-y-3 text-xs mb-4">
                 Leave us a message and we'll get back to you as soon as
                 possible!
               </p>
 
-              {/* Email Input */}
               {!isAnonymous && (
                 <input
                   type="email"
                   placeholder="Enter Your Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full mb-4 p-3 border border-gray-300 rounded-full h-10  focus:outline-none focus:border-customOrange"
+                  className="w-full mb-4 p-3 border border-gray-300 rounded-full h-10 focus:outline-none focus:border-customOrange"
                 />
               )}
 
-              {/* Message Input */}
               <textarea
                 placeholder="Write a message.."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="w-full mb-4 p-3 border border-gray-300  resize-none rounded-md focus:outline-none bg-gray-100 h-44 focus:border-customOrange placeholder:text-top placeholder:pl-1 placeholder:pt-2"
+                className="w-full mb-4 p-3 border border-gray-300 resize-none rounded-md focus:outline-none bg-gray-100 h-44 focus:border-customOrange placeholder:text-top placeholder:pl-1 placeholder:pt-2"
               />
 
-              {/* Anonymous Checkbox */}
               <div className="flex items-center mb-4">
                 <input
                   type="checkbox"
@@ -336,11 +395,10 @@ const Hero = () => {
                 </label>
               </div>
 
-              {/* Send Message Button */}
               <button
                 onClick={handleSendMessage}
                 className="w-full bg-customOrange text-white p-3 rounded-full hover:bg-orange-600 flex justify-center items-center"
-                disabled={isLoading} // Disable button when loading
+                disabled={isLoading}
               >
                 {isLoading ? (
                   <RotatingLines

@@ -21,17 +21,18 @@ const FAQs = () => {
       question: "Can I become a vendor?",
       answer: "Absolutely! If you're a vendor and want to join our platform, you can sign up to become a part of the My Thrift community. We’re always looking to partner with vendors who offer quality, affordable products.",
     },
-    {
-      question: "Where can we deliver to?",
-      answer: "Our logistics partners deliver nationwide. So, you can shop through Yaba Market while sitting in Port Harcourt getting a glass of wine, we've got you covered.",
-    },
+    
     {
       question: "How can I be sure of the product quality?",
       answer: "We provide detailed descriptions for every product on our platform, whether it’s brand new, thrifted, or even comes with a minor defect. For example, Nkechi wouldn’t mind getting a skirt for ₦1,000 if all she has to do is wash off a stain, right?",
     },
     {
       question: "Why should I trust the vendors on the platform?",
-      answer: "All vendors on My Thrift undergo a strict vetting and verification process to ensure they are authentic and trustworthy thereafter can they  list their products.",
+      answer: "All vendors on My Thrift will undergo a strict vetting and verification process to ensure they are authentic and trustworthy thereafter can they  list their products.",
+    },
+    {
+      question: "How will my items be delivered?",
+      answer: "We're currently in the process of securing reliable logistics partners to ensure your items are delivered safely and efficiently. While we finalize these partnerships, rest assured that we are exploring the best options to bring your items straight to your doorstep. We'll keep you updated as soon as we have more details to share!"
     },
     {
       question: "When are we launching?",
@@ -57,7 +58,7 @@ const FAQs = () => {
   ];
 
   return (
-    <section className="bg-[#F7F7F7] w-full mx-auto md:px-6  md:py-16">
+    <section className="bg-[#F7F7F7] w-full mx-auto md:px-6  md:py-16" id='faq-section'>
       <h2 className="text-center text-3xl font-bold translate-y-7 mb-8">FAQs</h2>
       <div className="md:space-y-4 lg:space-y-4 space-y-3 p-4">
         {faqs.map((faq, index) => (

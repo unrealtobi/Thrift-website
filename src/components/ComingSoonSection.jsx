@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { RotatingLines } from "react-loader-spinner";
 import toast, { Toaster } from "react-hot-toast";
-import appStore from "../assets/Group.png";
-import googlePlay from "../assets/Group 3.png";
-import phoneImage from "../assets/phone.svg";
+import appStore from "./images/apple ssooo.png";
+import googlePlay from "./images/google s.png";
+import phoneImage from "./images/thrift spin.png";
 import manSoon from "./images/mansoon.svg";
 
 const ComingSoonSection = () => {
   const [userType, setUserType] = useState("");
   const [inputValue, setInputValue] = useState("");
+  const [email, setEmail] = useState(""); // State for email input
   const [loading, setLoading] = useState(false);
   const [spin, setSpin] = useState(false); 
   const phoneImageRef = useRef(null);
@@ -22,12 +23,14 @@ const ComingSoonSection = () => {
     setInputValue(e.target.value);
   };
 
-  const handleWaitlistSubmit = () => {
-    const emailInput = document.querySelector('input[type="email"]').value;
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
 
+  const handleWaitlistSubmit = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!emailRegex.test(emailInput)) {
+    if (!emailRegex.test(email)) {
       toast.error("Please enter a valid email address.");
       return;
     }
@@ -92,7 +95,7 @@ const ComingSoonSection = () => {
             <img
               src={appStore}
               alt="App Store"
-              className="md:h-12 lg:h-12 h-9 cursor-pointer"
+              className="md:h-10 lg:h-11 height mt-0.5 cursor-pointer"
             />
           </div>
         </div>
@@ -102,7 +105,7 @@ const ComingSoonSection = () => {
             id="phone-image"
             src={phoneImage}
             alt="MyThrift App"
-            className={`md:h-auto md:w-auto px-4 md:px-0 ${
+            className={`md:h-auto md:w-4/6 px-4 md:px-0 ${
               spin ? "spin-animation" : ""
             }`} 
           />
@@ -111,7 +114,7 @@ const ComingSoonSection = () => {
 
       <section className="w-full max-w-[1440px] mx-auto pb-20 px-6 flex items-center justify-between bg-[url('/src/assets/curveline.png')] bg-no-repeat bg-center">
         <div className="relative md:block lg:block hidden">
-          <img src="https://res.cloudinary.com/dtaqusjav/image/upload/v1724415304/mansoon_msyshp.svg" alt="MyThrift App" className="h-auto w-auto" />
+          <img src="https://res.cloudinary.com/dtaqusjav/image/upload/v1724415304/mansoon_msyshp.svg" alt="MyThrift App" className="h-auto translate-y-20 w-auto" />
         </div>
 
         <div id="coming-soon" className="md:max-w-lg mt-12">
@@ -143,13 +146,13 @@ const ComingSoonSection = () => {
               <option value="vendor">Vendor</option>
             </select>
             <div className="pointer-events-none absolute md:mr-20 lg:mr-20 mr-12 inset-y-0 right-0 flex items-center px-2 text-gray-700">
-              <svg
+              {/* <svg
                 className="fill-current h-4 w-4"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
               >
                 <path d="M5.516 7.548l4.486 4.486 4.485-4.486a.75.75 0 1 1 1.06 1.06l-5.015 5.015a.75.75 0 0 1-1.06 0l-5.015-5.015a.75.75 0 1 1 1.06-1.06z" />
-              </svg>
+              </svg> */}
             </div>
           </div>
 
@@ -181,6 +184,8 @@ const ComingSoonSection = () => {
               type="email"
               placeholder="Enter Email Address"
               className="flex-grow py-3 px-12 bg-[#F7F7F7] text-gray-700 placeholder-gray-500 rounded-l-full focus:outline-none focus:border-gray-500"
+              value={email} // Bind the value to the state
+              onChange={handleEmailChange} // Update the state on input change
             />
             <button
               onClick={handleWaitlistSubmit}
@@ -205,11 +210,13 @@ const ComingSoonSection = () => {
               type="email"
               placeholder="Enter Email Address"
               className="flex-grow py-3 px-4 bg-[#F7F7F7] text-gray-700 placeholder-gray-500 rounded-full focus:outline-none focus:border-gray-500"
+              value={email} // Bind the value to the state
+              onChange={handleEmailChange} // Update the state on input change
             />
           </div>
           <button
             onClick={handleWaitlistSubmit}
-            className="bg-gradient-to-r from-customOrange mt-2 to-red-500 text-white font-semibold py-3 px-6 rounded-full md:hidden lg:hidden block w-full hover:bg-orange-600"
+            className="bg-gradient-to-r from-customOrange mt-2 flex justify-center to-red-500 text-white font-semibold py-3 px-6 rounded-full md:hidden lg:hidden block w-full hover:bg-orange-600"
             disabled={loading}
           >
             {loading ? (

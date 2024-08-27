@@ -7,6 +7,7 @@ import ComingSoonSection from './components/ComingSoonSection'
 import FAQs from './components/FAQS'
 import Countdown from './components/Countdown'
 import Footer from './components/Footer'
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   
@@ -19,6 +20,7 @@ function App() {
       <FAQs></FAQs>
       <Countdown></Countdown>
       <Footer/>
+      <Analytics/>
     </div>
   )
 }

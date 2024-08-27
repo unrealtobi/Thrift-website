@@ -8,7 +8,7 @@ import FAQs from './components/FAQS'
 import Countdown from './components/Countdown'
 import Footer from './components/Footer'
 import { Analytics } from "@vercel/analytics/react";
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 function App() {
   
   return (
@@ -21,6 +21,7 @@ function App() {
       <Countdown></Countdown>
       <Footer/>
       <Analytics/>
+      <SpeedInsights/>
     </div>
   )
 }

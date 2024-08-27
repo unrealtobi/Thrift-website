@@ -11,8 +11,9 @@ const ComingSoonSection = () => {
   const [inputValue, setInputValue] = useState("");
   const [email, setEmail] = useState(""); // State for email input
   const [loading, setLoading] = useState(false);
-  const [spin, setSpin] = useState(false); 
+  const [spin, setSpin] = useState(false);
   const phoneImageRef = useRef(null);
+  const [isToastShown, setIsToastShown] = useState(false);
 
   const handleUserTypeChange = (e) => {
     setUserType(e.target.value);
@@ -29,49 +30,68 @@ const ComingSoonSection = () => {
 
   const handleWaitlistSubmit = async () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  
+
     if (!emailRegex.test(email)) {
-      toast.error("Please enter a valid email address.");
+      if (!isToastShown) {
+        toast.error("Please enter a valid email address.");
+        setIsToastShown(true);
+      }
       return;
     }
-  
+
     if (!inputValue) {
-      toast.error("Please enter a valid name or store name.");
+      if (!isToastShown) {
+        toast.error("Please enter a valid name or store name.");
+        setIsToastShown(true);
+      }
       return;
     }
-  
+
     setLoading(true);
-  
+
     try {
-      const response = await fetch('https://mythriftwaitlist.fly.dev/api/v1/sendmail', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: inputValue,
-          email: email,
-          type: userType,
-        }),
-      });
-  
+      const response = await fetch(
+        "https://mythriftwaitlist.fly.dev/api/v1/sendmail",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: inputValue,
+            email: email,
+            type: userType,
+          }),
+        }
+      );
+
       const data = await response.json();
-  
+
       if (response.ok) {
         toast.success("Successfully joined the waitlist!");
+        setIsToastShown(false); // Reset the toast shown state after success
       } else if (response.status === 409) {
-        toast.error("Email has already been registered, Thank you.");
+        if (!isToastShown) {
+          toast.error("Email has already been registered, Thank you.");
+          setIsToastShown(true);
+        }
       } else {
-        toast.error(`Failed to join the waitlist: ${data.message || 'Unknown error'}`);
+        if (!isToastShown) {
+          toast.error(
+            `Failed to join the waitlist: ${data.message || "Unknown error"}`
+          );
+          setIsToastShown(true);
+        }
       }
     } catch (error) {
-      toast.error(`An error occurred: ${error.message}`);
+      if (!isToastShown) {
+        toast.error(`An error occurred: ${error.message}`);
+        setIsToastShown(true);
+      }
     } finally {
       setLoading(false);
     }
   };
-  
-  
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -81,7 +101,7 @@ const ComingSoonSection = () => {
         }
       },
       {
-        threshold: 0.5, 
+        threshold: 0.5,
       }
     );
 
@@ -133,14 +153,18 @@ const ComingSoonSection = () => {
             alt="MyThrift App"
             className={`md:h-auto md:w-4/6 px-4 md:px-0 ${
               spin ? "spin-animation" : ""
-            }`} 
+            }`}
           />
         </div>
       </section>
 
       <section className="w-full max-w-[1440px] mx-auto pb-20 px-6 flex items-center justify-between bg-[url('/src/assets/curveline.png')] bg-no-repeat bg-center">
         <div className="relative md:block lg:block hidden">
-          <img src="https://res.cloudinary.com/dtaqusjav/image/upload/v1724415304/mansoon_msyshp.svg" alt="Man smiling" className="h-auto translate-y-20 w-auto" />
+          <img
+            src="https://res.cloudinary.com/dtaqusjav/image/upload/v1724415304/mansoon_msyshp.svg"
+            alt="Man smiling"
+            className="h-auto translate-y-20 w-auto"
+          />
         </div>
 
         <div id="coming-soon" className="md:max-w-lg mt-12">
@@ -162,15 +186,22 @@ const ComingSoonSection = () => {
 
           <div className="md:relative md:justify-start flex justify-center text-gray-700 mb-5">
             <select
-              className="block appearance-none md:w-full md:max-w-md w-full bg-[#F7F7F7] border text-gray-700 placeholder-gray-500 px-4 py-3 pr-8 rounded-full focus:outline-none focus:border-gray-500"
+              className="block appearance-none md:w-full md:max-w-md w-full bg-[#F7F7F7] border text-gray-700 placeholder-gray-500 px-4 py-3 pr-12 rounded-full focus:outline-none focus:border-gray-500 bg-no-repeat bg-right"
               aria-label="Who are you registering as"
               value={userType}
               onChange={handleUserTypeChange}
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='gray'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E%3C/svg%3E")`,
+                backgroundPositionX: "calc(100% - 1rem)",
+                backgroundPositionY: "center",
+                backgroundSize: "1rem 1rem",
+              }}
             >
               <option value="">Who are you registering as...</option>
               <option value="customer">Customer</option>
               <option value="vendor">Vendor</option>
             </select>
+
             <div className="pointer-events-none absolute md:mr-20 lg:mr-20 mr-12 inset-y-0 right-0 flex items-center px-2 text-gray-700">
               {/* <svg
                 className="fill-current h-4 w-4"

@@ -18,6 +18,8 @@ const Hero = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [isToastShown, setIsToastShown] = useState(false);
+
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const textRef = useRef(null);
@@ -100,12 +102,18 @@ const Hero = () => {
 
   const handleSendMessage = async () => {
     if (!isAnonymous && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      toast.error("Please enter a valid email address.");
+      if (!isToastShown) {
+        toast.error("Please enter a valid email address.");
+        setIsToastShown(true);
+      }
       return;
     }
 
     if (!message.trim()) {
-      toast.error("Please enter a message.");
+      if (!isToastShown) {
+        toast.error("Please enter a message.");
+        setIsToastShown(true);
+      }
       return;
     }
 
@@ -135,13 +143,20 @@ const Hero = () => {
         setEmail("");
         setMessage("");
         setIsAnonymous(false);
+        setIsToastShown(false); // Reset toast shown state after successful message
       } else {
-        toast.error(
-          `Failed to send message: ${data.message || "Unknown error"}`
-        );
+        if (!isToastShown) {
+          toast.error(
+            `Failed to send message: ${data.message || "Unknown error"}`
+          );
+          setIsToastShown(true);
+        }
       }
     } catch (error) {
-      toast.error(`An error occurred: ${error.message}`);
+      if (!isToastShown) {
+        toast.error(`An error occurred: ${error.message}`);
+        setIsToastShown(true);
+      }
     } finally {
       setIsLoading(false);
     }

@@ -36,7 +36,7 @@ const FAQs = () => {
     },
     {
       question: "When are we launching?",
-      answer: "We’re set to launch in late December 2024, with over 40+ vendors ready to showcase their products on our platform. We will be glad to have you onboard!",
+      answer: "We’re set to launch in late November 2024, with over 40+ vendors ready to showcase their products on our platform. We will be glad to have you onboard!",
     },
     {
       question: "How is payment handled?",

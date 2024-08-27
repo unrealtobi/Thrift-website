@@ -103,27 +103,32 @@ const Hero = () => {
       toast.error("Please enter a valid email address.");
       return;
     }
-  
+
     if (!message.trim()) {
       toast.error("Please enter a message.");
       return;
     }
-  
+
     setIsLoading(true);
-  
+
     try {
-      const response = await fetch("https://mythriftwaitlist.fly.dev/api/v1/contactus", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          message: isAnonymous ? "Anonymous" : `From: ${email}\nMessage: ${message}`,
-        }),
-      });
-  
+      const response = await fetch(
+        "https://mythriftwaitlist.fly.dev/api/v1/contactus",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            message: isAnonymous
+              ? "Anonymous"
+              : `From: ${email}\nMessage: ${message}`,
+          }),
+        }
+      );
+
       const data = await response.json();
-  
+
       if (response.ok) {
         toast.success("Message sent successfully!");
         closeModal();
@@ -131,7 +136,9 @@ const Hero = () => {
         setMessage("");
         setIsAnonymous(false);
       } else {
-        toast.error(`Failed to send message: ${data.message || 'Unknown error'}`);
+        toast.error(
+          `Failed to send message: ${data.message || "Unknown error"}`
+        );
       }
     } catch (error) {
       toast.error(`An error occurred: ${error.message}`);
@@ -139,7 +146,6 @@ const Hero = () => {
       setIsLoading(false);
     }
   };
-  
 
   const handleScrollToWaitlist = () => {
     const waitlistSection = document.getElementById("coming-soon");
@@ -153,7 +159,7 @@ const Hero = () => {
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
     }
-    toggleMenu(); 
+    toggleMenu();
   };
 
   const containerVariants = {
@@ -219,7 +225,6 @@ const Hero = () => {
           background:
             "linear-gradient(to bottom, rgba(249, 83, 30, 0.8) 1%, rgba(0, 0, 0, 0.7) 10%, rgba(0, 0, 0, 0.9) 100%)",
         }}
-        
       >
         <div className="flex flex-col justify-between h-full">
           {/* Top Section: Branding and Close Button */}
@@ -347,7 +352,7 @@ const Hero = () => {
           </div>
 
           <div
-            className="md:w-full w-full md:mt-20  flex justify-center items-center md:h-full opacity-0 transform"
+            className="md:w-full w-full md:mt-20   flex justify-center items-center md:h-full opacity-0 transform"
             ref={imageRef}
           >
             <img

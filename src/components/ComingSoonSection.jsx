@@ -140,7 +140,7 @@ const ComingSoonSection = () => {
 
       <section className="w-full max-w-[1440px] mx-auto pb-20 px-6 flex items-center justify-between bg-[url('/src/assets/curveline.png')] bg-no-repeat bg-center">
         <div className="relative md:block lg:block hidden">
-          <img src="https://res.cloudinary.com/dtaqusjav/image/upload/v1724415304/mansoon_msyshp.svg" alt="MyThrift App" className="h-auto translate-y-20 w-auto" />
+          <img src="https://res.cloudinary.com/dtaqusjav/image/upload/v1724415304/mansoon_msyshp.svg" alt="Man smiling" className="h-auto translate-y-20 w-auto" />
         </div>
 
         <div id="coming-soon" className="md:max-w-lg mt-12">
